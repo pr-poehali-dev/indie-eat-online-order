@@ -33,9 +33,9 @@ const menuItems: MenuItem[] = [
 ];
 
 const promos = [
-  { id: 1, title: 'Комбо за 500₽', description: 'Бургер + Картофель Фри + Напиток', discount: '20%', color: 'bg-red-500' },
-  { id: 2, title: 'Счастливые часы', description: 'Скидка 30% с 14:00 до 16:00', discount: '30%', color: 'bg-purple-500' },
-  { id: 3, title: 'За 1000 баллов', description: 'Бесплатный бургер на выбор', discount: 'FREE', color: 'bg-orange-500' },
+  { id: 1, title: 'Комбо за 500₽', description: 'Бургер + Картофель Фри + Напиток', discount: '20%' },
+  { id: 2, title: 'Счастливые часы', description: 'Скидка 30% с 14:00 до 16:00', discount: '30%' },
+  { id: 3, title: 'За 1000 баллов', description: 'Бесплатный бургер на выбор', discount: 'FREE' },
 ];
 
 const reviews = [
@@ -86,37 +86,34 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-purple-50">
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b-4 border-primary shadow-lg">
+    <div className="min-h-screen bg-[#121212]">
+      <header className="sticky top-0 z-50 bg-black/90 backdrop-blur-lg border-b-2 border-primary shadow-lg shadow-primary/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="text-5xl animate-bounce">🍔</div>
-              <div>
-                <h1 className="text-3xl font-bold text-primary">Indie eat</h1>
-                <p className="text-sm text-muted-foreground">Быстро. Вкусно. Весело!</p>
-              </div>
+            <div className="flex items-center gap-4">
+              <img src="https://cdn.poehali.dev/files/415e6472-b2b3-48fc-91bd-1a3f936086c2.png" alt="USER" className="w-16 h-16 object-contain" />
+              <img src="https://cdn.poehali.dev/files/ea5e0d63-9bd7-4956-b8bd-70db29d68989.png" alt="INDIE EAT" className="h-12 object-contain" />
             </div>
             
             <div className="flex items-center gap-4">
-              <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+              <Card className="bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/40 backdrop-blur-sm">
                 <CardContent className="p-3 flex items-center gap-2">
-                  <Icon name="Star" size={20} className="fill-yellow-300 text-yellow-300" />
+                  <Icon name="Star" size={20} className="fill-primary text-primary" />
                   <div>
-                    <p className="text-xs opacity-90">Ваши баллы</p>
-                    <p className="text-xl font-bold">{loyaltyPoints}</p>
+                    <p className="text-xs text-muted-foreground">Ваши баллы</p>
+                    <p className="text-xl font-bold text-primary">{loyaltyPoints}</p>
                   </div>
                 </CardContent>
               </Card>
               
               <Button 
                 size="lg" 
-                className="relative shadow-lg shadow-primary/50"
+                className="relative shadow-lg shadow-primary/50 bg-primary hover:bg-primary/80"
                 onClick={() => setActiveSection('menu')}
               >
                 <Icon name="ShoppingCart" size={20} />
                 {cartItemsCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 bg-red-500 text-white animate-bounce">
+                  <Badge className="absolute -top-2 -right-2 bg-primary text-black animate-bounce border-2 border-black">
                     {cartItemsCount}
                   </Badge>
                 )}
@@ -126,7 +123,7 @@ const Index = () => {
         </div>
       </header>
 
-      <nav className="bg-white border-b sticky top-[88px] z-40">
+      <nav className="bg-black/50 backdrop-blur-sm border-b border-primary/20 sticky top-[88px] z-40">
         <div className="container mx-auto px-4">
           <div className="flex gap-2 overflow-x-auto py-3">
             {['menu', 'delivery', 'promos', 'about', 'reviews'].map((section) => (
@@ -134,7 +131,7 @@ const Index = () => {
                 key={section}
                 variant={activeSection === section ? 'default' : 'ghost'}
                 onClick={() => setActiveSection(section)}
-                className="whitespace-nowrap"
+                className="whitespace-nowrap hover:bg-primary/10"
               >
                 {section === 'menu' && '🍽️ Меню'}
                 {section === 'delivery' && '🚚 Доставка'}
@@ -166,7 +163,7 @@ const Index = () => {
                 <TabsContent key={category} value={category}>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {menuItems.filter(item => item.category === category).map((item) => (
-                      <Card key={item.id} className="transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-2 hover:border-primary">
+                      <Card key={item.id} className="transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 border-2 border-primary/20 hover:border-primary bg-card">
                         <CardHeader>
                           <div className="text-6xl mb-3 text-center">{item.emoji}</div>
                           <CardTitle className="text-xl">{item.name}</CardTitle>
@@ -198,7 +195,7 @@ const Index = () => {
             </Tabs>
 
             {cart.length > 0 && (
-              <Card className="border-4 border-primary shadow-2xl">
+              <Card className="border-2 border-primary shadow-2xl shadow-primary/20 bg-card">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Icon name="ShoppingBag" size={24} />
@@ -236,12 +233,12 @@ const Index = () => {
                     </div>
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>Вы получите баллов:</span>
-                      <span className="font-semibold text-purple-600">+{totalPoints} ⭐</span>
+                      <span className="font-semibold text-primary">+{totalPoints} ⭐</span>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full text-lg py-6" size="lg" onClick={checkout}>
+                  <Button className="w-full text-lg py-6 bg-primary hover:bg-primary/80 text-black font-bold" size="lg" onClick={checkout}>
                     <Icon name="Check" size={20} />
                     Оформить заказ
                   </Button>
@@ -260,7 +257,7 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">⚡</div>
                   <CardTitle>Быстро</CardTitle>
@@ -270,7 +267,7 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">🎯</div>
                   <CardTitle>Точно</CardTitle>
@@ -280,7 +277,7 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <Card className="text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">💰</div>
                   <CardTitle>Выгодно</CardTitle>
@@ -291,7 +288,7 @@ const Index = () => {
               </Card>
             </div>
 
-            <Card>
+            <Card className="border border-primary/20">
               <CardHeader>
                 <CardTitle>Условия доставки</CardTitle>
               </CardHeader>
@@ -332,14 +329,14 @@ const Index = () => {
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               {promos.map((promo) => (
-                <Card key={promo.id} className={`${promo.color} text-white border-0 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}>
+                <Card key={promo.id} className="bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20">
                   <CardHeader>
-                    <Badge className="w-fit bg-white text-black mb-2">{promo.discount}</Badge>
-                    <CardTitle className="text-2xl">{promo.title}</CardTitle>
-                    <CardDescription className="text-white/90">{promo.description}</CardDescription>
+                    <Badge className="w-fit bg-primary text-black mb-2 font-bold">{promo.discount}</Badge>
+                    <CardTitle className="text-2xl text-primary">{promo.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{promo.description}</CardDescription>
                   </CardHeader>
                   <CardFooter>
-                    <Button variant="secondary" className="w-full">
+                    <Button className="w-full bg-primary hover:bg-primary/80 text-black font-bold">
                       Использовать
                     </Button>
                   </CardFooter>
@@ -347,10 +344,10 @@ const Index = () => {
               ))}
             </div>
 
-            <Card className="bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300">
+            <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary/40">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Icon name="Trophy" size={24} className="text-purple-600" />
+                  <Icon name="Trophy" size={24} className="text-primary" />
                   Программа лояльности
                 </CardTitle>
               </CardHeader>
@@ -380,7 +377,7 @@ const Index = () => {
               <p className="text-xl text-muted-foreground">История Indie eat</p>
             </div>
 
-            <Card className="mb-6">
+            <Card className="mb-6 border border-primary/20">
               <CardContent className="pt-6 space-y-4">
                 <p className="text-lg">
                   Indie eat — это не просто фастфуд, это целая философия! Мы создаем атмосферу,
@@ -394,7 +391,7 @@ const Index = () => {
             </Card>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="text-center">
+              <Card className="text-center border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">🏆</div>
                   <CardTitle>5+ лет</CardTitle>
@@ -402,7 +399,7 @@ const Index = () => {
                 </CardHeader>
               </Card>
 
-              <Card className="text-center">
+              <Card className="text-center border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">🌟</div>
                   <CardTitle>50K+</CardTitle>
@@ -410,7 +407,7 @@ const Index = () => {
                 </CardHeader>
               </Card>
 
-              <Card className="text-center">
+              <Card className="text-center border border-primary/20">
                 <CardHeader>
                   <div className="text-5xl mb-3">📍</div>
                   <CardTitle>15</CardTitle>
@@ -431,7 +428,7 @@ const Index = () => {
 
             <div className="grid md:grid-cols-1 gap-6">
               {reviews.map((review) => (
-                <Card key={review.id} className="transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <Card key={review.id} className="transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 border border-primary/20">
                   <CardHeader>
                     <div className="flex items-center gap-3">
                       <div className="text-4xl">{review.avatar}</div>
@@ -452,13 +449,13 @@ const Index = () => {
               ))}
             </div>
 
-            <Card className="mt-6 bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-300">
+            <Card className="mt-6 bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary/40">
               <CardHeader>
                 <CardTitle>Оставьте свой отзыв!</CardTitle>
                 <CardDescription>Получите 50 бонусных баллов за отзыв</CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button className="w-full">
+                <Button className="w-full bg-primary hover:bg-primary/80 text-black font-bold">
                   <Icon name="MessageCircle" size={18} />
                   Написать отзыв
                 </Button>
@@ -468,7 +465,7 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="bg-gray-900 text-white mt-20 py-12">
+      <footer className="bg-black border-t-2 border-primary/20 text-white mt-20 py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
@@ -479,8 +476,8 @@ const Index = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-3">Контакты</h4>
-              <p className="text-sm text-red-900">📞 +7 915 405-72-33</p>
-              <p className="text-gray-400 text-sm">📧 junromosa@yandex.ru</p>
+              <p className="text-gray-400 text-sm">📞 8-800-555-35-35</p>
+              <p className="text-gray-400 text-sm">📧 hello@indieeat.ru</p>
             </div>
             <div>
               <h4 className="font-semibold mb-3">Время работы</h4>
